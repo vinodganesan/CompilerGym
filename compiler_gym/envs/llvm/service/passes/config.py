@@ -157,9 +157,10 @@ CREATE_PASS_NAME_MAP = {
 
 # A list of pass names that should be excluded from the action space.
 _EXCLUDED_PASSES = {
-    # Garbage collection.
+    # Irrelevant garbage collection passes.
     "StripGCRelocates",
     "PlaceBackedgeSafepointsImpl",
+    "PlaceSafepointsPass",
     # Doesn't use legacy pass constructor API, or requires additional
     # constructor arguments that are not available.
     "WholeProgramDevirt",
@@ -173,6 +174,9 @@ _EXCLUDED_PASSES = {
     "DAH",  # Bugpoint only.
     "MetaRenamerPass",
     "PAEvalPass",
+    "BarrierNoop",  # Used for debugging pass manager.
+    "StripNonLineTableDebugInfoPass",  # Debug stripping.
+    "StripDeadDebugInfoPass",  # Debug stripping.
     # Unwanted instrumentation passes.
     "BoundsCheckingLegacy",
     "ASanGlobalsMetadataWrapperPass",
@@ -185,20 +189,28 @@ _EXCLUDED_PASSES = {
     "FunctionImportPass",
     "DataFlowSanitizerPass",
     "InstrOrderFilePass",
-    # Profile-guided optimization instrumentation.
+    "PostInlineEntryExitInstrumenter",
+    # Profile-guided optimization or profiling.
     "PGOIndirectCallPromotionLegacyPass",
     "PGOInstrumentationUseLegacyPass",
     "PGOInstrumentationGenCreateVarLegacyPass",
     "PGOInstrumentationGenLegacyPass",
     "PGOInstrumentationUseLegacyPass",
     "PGOMemOpsizeOptLegacyPass",
+    "PgomemOpsizeOptLegacyPass",
     "InstrProfilingLegacyPass",
+    "ControlHeightReductionLegacyPass",
     # Microsoft's Control Flow Guard checks on Windows targets.
     # https://llvm.org/doxygen/CFGuard_8cpp.html
     "CFGuardCheckPass",
     "CFGuardDispatchPass",
     # We don't want to change the visibility of symbols.
     "InternalizePass",
+    # Irrelevant Objective-C Automatic Reference Counting passes.
+    "ObjCarcapelimPass",
+    "ObjCarccontractPass",
+    "ObjCarcexpandPass",
+    "ObjCarcoptPass",
 }
 
 # The name of the LLVM target to extract architecture-specific transforms for.
